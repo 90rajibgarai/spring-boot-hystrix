@@ -72,26 +72,27 @@ Note : At this movement it's not developed for Reactive Programming.
 : Hystrix Parameters :
 ----------------------
 
-  @HystrixCommand(fallbackMethod = "getMovieRatingsFallback", commandProperties = {
-    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
-    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")	
-  })
-
-@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000")
+    @HystrixCommand(fallbackMethod = "getMovieRatingsFallback", commandProperties = {
+        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
+        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+        @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+        @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")	
+    })
+------------------------------------------------------------------------------------------------------------------------------
+    
+    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000")
 
 => Wait for 2 seconds if doesn't get response then break the circuit.
 
-@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "6")
+    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "6")
 
 => Get last 6 request to calculate to failed percentages.
 
-@HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50")
+    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50")
 
 => Break the circuit if failed percentage above 50%
 
-@HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")	
+    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")	
 
 => It's mean how long our circuit breaker is sleep. Here waiting 5 second after that it's send the request again.
 
@@ -102,5 +103,64 @@ Note : At this movement it's not developed for Reactive Programming.
 OUT PUT :
 ---------
 <img src="https://github.com/90rajibgarai/doc-important-links/blob/master/Architectures/Hystrix/Output_1.png">
+
 <img src="https://github.com/90rajibgarai/doc-important-links/blob/master/Architectures/Hystrix/Output_2.png">
+
+Live Data :
+-----------
+
+Http Request : localhost:9091/movies/summary/500
+
+Response :
+
+------------------------------------------------------------------------------------------------------------------------------------
+    {
+        "id": "500",
+        "title": "Reservoir Dogs",
+        "overview": "A botched robbery indicates a police informant, and the pressure mounts in the aftermath at a warehouse. Crime begets violence as the survivors -- veteran Mr. White, newcomer Mr. Orange, psychopathic parolee Mr. Blonde, bickering weasel Mr. Pink and Nice Guy Eddie -- unravel.",
+        "status": "Released",
+        "tagline": "Every dog has his day.",
+        "revenue": 2859750,
+        "release_date": "1992-09-02",
+        "poster_path": "/g7spS2Y4SZoQoC6Hn7zoqEqdYqR.jpg",
+        "production_companies": [
+            {
+                "id": 285,
+                "logo_path": null,
+                "name": "Live Entertainment",
+                "origin_country": ""
+            },
+            {
+                "id": 26198,
+                "logo_path": null,
+                "name": "Dog Eat Dog Productions",
+                "origin_country": ""
+            }
+        ],
+        "production_countries": [
+            {
+                "id": null,
+                "logo_path": null,
+                "name": "United States of America",
+                "origin_country": null
+            }
+        ],
+        "imdb_id": "tt0105236",
+        "original_language": "en",
+        "popularity": 41.229,
+        "budget": 1200000,
+        "genres": [
+            {
+                "id": 80,
+                "name": "Crime"
+            },
+            {
+                "id": 53,
+                "name": "Thriller"
+            }
+        ],
+        "adult": false
+    }
+    
+------------------------------------------------------------------------------------------------------------------------------------
 
