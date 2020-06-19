@@ -26,7 +26,7 @@ public class MovieSummaryServiceImpl implements MovieSummaryService
 		
 		try
 		{
-			movieSummary = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + id + "?api_key=" +  apiKey, MovieSummary.class);
+			movieSummary = restTemplate.getForObject(("https://api.themoviedb.org/3/movie/" + id + "?api_key=" + apiKey).trim(), MovieSummary.class);
 		}
 		catch(Exception e)
 		{
